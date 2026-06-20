@@ -1,5 +1,5 @@
-const path = require('path'); // <-- Naya add kiya hai
-const mongoose = require('mongoose')
+const path = require('path'); 
+const mongoose = require('mongoose');
 const express = require('express');
 const uploadRoutes = require('./routes/uploadRoutes');
 const cors = require('cors');
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/admin', adminRoutes);
 app.use('/api/hr', hrRoutes);
-// Test Route
+
 // Test Route
 app.get('/api/test', (req, res) => {
     res.json({ message: "Hello Developer! The backend server is running successfully." });
@@ -29,16 +29,18 @@ app.get('/api/test', (req, res) => {
 const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 app.use('/api/upload', uploadRoutes);
+
 // Linking Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 
 // ==========================================
-// PRODUCTION FRONTEND SERVING (Naya Code)
+// PRODUCTION FRONTEND SERVING (FIXED CODE)
 // ==========================================
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-app.get('*', (req, res) => {
+// Naya Fix: app.get('*') hata kar app.use() kar diya
+app.use((req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
 });
 // ==========================================
