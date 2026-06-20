@@ -90,7 +90,7 @@ const CoursePlayer = () => {
       const userName = localStorage.getItem('userName') || localStorage.getItem('name') || "Learner";
       const payload = { text: doubtText, user: userName };
 
-      const response = await axios.post(`http://localhost:5000/api/courses/${courseData._id || courseData.id}/qa`, payload, {
+      const response = await axios.post(`/api/courses/${courseData._id || courseData.id}/qa`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

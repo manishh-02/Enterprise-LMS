@@ -29,7 +29,7 @@ const HRDashboard = () => {
     try {
       setIsLoading(true);
       const token = localStorage.getItem('token');
-      const { data } = await axios.get('http://localhost:5000/api/hr/workforce', {
+      const { data } = await axios.get('/api/hr/workforce', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -53,7 +53,7 @@ const HRDashboard = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/admin/users', newUserForm, {
+      await axios.post('/api/admin/users', newUserForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -83,7 +83,7 @@ const HRDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       // Sending to our newly created backend route
-      await axios.post(`http://localhost:5000/api/hr/nudge/${nudgeData.empId}`, { message: nudgeData.message }, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`/api/hr/nudge/${nudgeData.empId}`, { message: nudgeData.message }, { headers: { Authorization: `Bearer ${token}` } });
       
       toast.success(`Direct Nudge sent to ${nudgeData.empName}'s telemetry node.`, {
         icon: '📨',

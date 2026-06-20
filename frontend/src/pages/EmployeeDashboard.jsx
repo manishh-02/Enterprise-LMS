@@ -26,7 +26,7 @@ const EmployeeDashboard = () => {
       setIsFetchingCourses(true);
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/courses/all', {
+        const response = await axios.get('/api/courses/all', {
           headers: { Authorization: `Bearer ${token}` }
         });
         

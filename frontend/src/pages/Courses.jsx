@@ -20,7 +20,7 @@ const Courses = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get('http://localhost:5000/api/courses', config);
+      const response = await axios.get('/api/courses', config);
       setCourses(response.data.data);
     } catch (err) {
       console.error('Failed to fetch courses');
@@ -45,7 +45,7 @@ const Courses = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.put(`http://localhost:5000/api/courses/${editingCourse._id}`, formData, config);
+      const response = await axios.put(`/api/courses/${editingCourse._id}`, formData, config);
       
       // Update local state instantly
       setCourses(courses.map(c => c._id === editingCourse._id ? response.data.data : c));
@@ -61,7 +61,7 @@ const Courses = () => {
       try {
         const token = localStorage.getItem('token');
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        await axios.delete(`http://localhost:5000/api/courses/${id}`, config);
+        await axios.delete(`/api/courses/${id}`, config);
         
         // Remove from UI instantly
         setCourses(courses.filter(course => course._id !== id));

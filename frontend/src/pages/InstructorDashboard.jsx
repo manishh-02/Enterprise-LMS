@@ -21,7 +21,7 @@ const InstructorDashboard = () => {
   const fetchMyCourses = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/courses', {
+      const res = await axios.get('/api/courses', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMyCourses(res.data.data || []);
@@ -108,10 +108,10 @@ const InstructorDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const formData = new FormData();
-      let uploadEndpoint = 'http://localhost:5000/api/upload/video';
+      let uploadEndpoint = '/api/upload/video';
       
       if (type === 'notes') {
-        uploadEndpoint = 'http://localhost:5000/api/upload/pdf'; 
+        uploadEndpoint = '/api/upload/pdf'; 
         formData.append('pdf', file);
       } else {
         formData.append('video', file);
@@ -182,7 +182,7 @@ const InstructorDashboard = () => {
         toast.loading("Uploading Main Video...", { id: toastId });
         const videoData = new FormData();
         videoData.append('video', form.videoFile);
-        const uploadResponse = await axios.post('http://localhost:5000/api/upload/video', videoData, {
+        const uploadResponse = await axios.post('/api/upload/video', videoData, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         finalMainVideoUrl = uploadResponse.data.videoUrl;
@@ -195,9 +195,9 @@ const InstructorDashboard = () => {
       };
 
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/courses/${editingId}`, payload, { headers: { 'Authorization': `Bearer ${token}` } });
+        await axios.put(`/api/courses/${editingId}`, payload, { headers: { 'Authorization': `Bearer ${token}` } });
       } else {
-        await axios.post('http://localhost:5000/api/courses', payload, { headers: { 'Authorization': `Bearer ${token}` } });
+        await axios.post('/api/courses', payload, { headers: { 'Authorization': `Bearer ${token}` } });
       }
 
       toast.success(editingId ? "Course Updated!" : "Course Deployed!", { id: toastId, icon: '🚀' });
@@ -214,7 +214,7 @@ const InstructorDashboard = () => {
     if (!window.confirm(`🚨 Permanently delete "${title}"?`)) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/courses/${courseId}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/courses/${courseId}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchMyCourses();
       toast.success("Course vaporized.");
     } catch (error) { toast.error("Failed to delete."); }
@@ -224,7 +224,7 @@ const InstructorDashboard = () => {
     if (!window.confirm("Delete this comment permanently?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/courses/${courseId}/qa/${qaId}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/courses/${courseId}/qa/${qaId}`, { headers: { Authorization: `Bearer ${token}` } });
       toast.success("Comment deleted.");
       fetchMyCourses(); 
     } catch (error) { toast.error("Failed to delete comment."); }

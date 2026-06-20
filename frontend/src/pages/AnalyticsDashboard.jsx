@@ -8,7 +8,7 @@ const AnalyticsDashboard = () => {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/admin/analytics', {
+        const { data } = await axios.get('/api/admin/analytics', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setData(data.data);

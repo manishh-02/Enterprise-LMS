@@ -45,7 +45,7 @@ const AddCourse = () => {
       const videoData = new FormData();
       videoData.append('video', videoFile); 
 
-      const uploadResponse = await axios.post('http://localhost:5000/api/upload/video', videoData, {
+      const uploadResponse = await axios.post('/api/upload/video', videoData, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}` 
@@ -58,7 +58,7 @@ const AddCourse = () => {
       const coursePayload = { ...formData, videoUrl: s3VideoUrl };
 
       // YAHAN FIX KIYA HAI: '/create' hata diya hai taaki backend se match ho jaye
-      await axios.post('http://localhost:5000/api/courses', coursePayload, {
+      await axios.post('/api/courses', coursePayload, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 

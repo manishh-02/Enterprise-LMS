@@ -1,3 +1,4 @@
+const path = require('path'); // <-- Naya add kiya hai
 const mongoose = require('mongoose')
 const express = require('express');
 const uploadRoutes = require('./routes/uploadRoutes');
@@ -31,6 +32,17 @@ app.use('/api/upload', uploadRoutes);
 // Linking Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
+
+// ==========================================
+// PRODUCTION FRONTEND SERVING (Naya Code)
+// ==========================================
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+});
+// ==========================================
+
 // Server Start
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -19,7 +19,7 @@ const AdminUserManagement = () => {
   const fetchUsers = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get("http://localhost:5000/api/admin/users", {
+      const { data } = await axios.get("/api/admin/users", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
       setUsers(data.data || []);
@@ -36,11 +36,11 @@ const AdminUserManagement = () => {
     try {
       if (editingUser) {
         // Edit Existing User API Call
-        await axios.put(`http://localhost:5000/api/admin/users/${editingUser._id}`, payload, config);
+        await axios.put(`/api/admin/users/${editingUser._id}`, payload, config);
         toast.success("Identity updated in Database!", { icon: '🟢' });
       } else {
         // Create New User API Call
-        await axios.post("http://localhost:5000/api/admin/users", payload, config);
+        await axios.post("/api/admin/users", payload, config);
         toast.success("New User provisioned successfully!", { icon: '🚀' });
       }
       
@@ -59,7 +59,7 @@ const AdminUserManagement = () => {
     const { user } = confirmModal;
     const newStatus = user.status === 'Active' ? 'Pending' : 'Active';
     try {
-      await axios.put(`http://localhost:5000/api/admin/users/${user._id}`, { status: newStatus }, {
+      await axios.put(`/api/admin/users/${user._id}`, { status: newStatus }, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
       setUsers(users.map(u => u._id === user._id ? { ...u, status: newStatus } : u));
@@ -71,7 +71,7 @@ const AdminUserManagement = () => {
   const handleDelete = async (id) => {
     if(window.confirm("Are you sure you want to delete this user permanently from the Enterprise Network?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/users/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+        await axios.delete(`/api/admin/users/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
         toast.success('Identity permanently erased.');
         setUsers(users.filter(user => user._id !== id));
       } catch (err) { toast.error('Deletion failed.'); }

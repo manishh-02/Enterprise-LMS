@@ -20,7 +20,7 @@ const Signup = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+      const response = await axios.post('/api/auth/register', { name, email, password });
       
       // Show God-Level Success Message
       setSuccessMsg(response.data.message);
