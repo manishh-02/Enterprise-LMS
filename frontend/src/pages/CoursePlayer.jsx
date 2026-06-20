@@ -298,7 +298,7 @@ const CoursePlayer = () => {
       link.href = canvas.toDataURL('image/png');
       link.click();
       
-      toast.success("God-Level Certificate Forged!", { id: toastId, style: { background: '#fbbf24', color: '#000' }});
+      toast.success("Certificate Forged!", { id: toastId, style: { background: '#fbbf24', color: '#000' }});
     } catch (error) {
       console.error(error);
       toast.error("Failed to generate certificate.", { id: toastId });
