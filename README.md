@@ -70,7 +70,6 @@ To run this project locally, create a `.env` file in the `backend` directory and
 **1. Clone the repository:**
 ```bash
 git clone [https://github.com/yourusername/Enterprise-LMS.git](https://github.com/yourusername/Enterprise-LMS.git)
-<img width="1883" height="846" alt="Screenshot 2026-06-20 131723" src="https://github.com/user-attachments/assets/e37159f8-cbeb-4670-8dca-4f7bdbdfcc0f" />
 
 ```
 
